@@ -9,7 +9,7 @@ class EightPuzzle:
     def __init__(self, master):
         self.master = master
         self.master.title("8-Puzzle Game")
-        self.master.geometry("290x370")
+        self.master.geometry("290x405")
         self.tiles = [[None for _ in range(3)] for _ in range(3)]
         self.empty_tile = (2, 2)
         self.initialize_puzzle()
@@ -34,23 +34,22 @@ class EightPuzzle:
         for i in range(3):
             for j in range(3):
                 if self.tiles[i][j] != 0:
-                    btn = tk.Button(self.master, text=str(self.tiles[i][j]), font=('Arial', 24), width=4, height=2,
-                                    command=lambda i=i, j=j: self.move_tile(i, j))
+                    btn = tk.Button(self.master, text=str(self.tiles[i][j]), font=('Arial', 24), width=4, height=2)
                     btn.grid(row=i, column=j, padx=5, pady=5)
                     self.buttons[i][j] = btn
                 else:
                     self.buttons[i][j] = None
         reset_button = tk.Button(self.master, text="Reset", width=9, height=1, font=('Arial', 10), command=self.reset)
-        reset_button.grid(row=3, column=0, padx=5, pady=5)
+        reset_button.grid(row=3, column=1, padx=5, pady=5)
 
         a_star_button = tk.Button(self.master, text="A*", width=9, height=1, font=('Arial', 10), command=self.run_a_star)
-        a_star_button.grid(row=3, column=1, padx=5, pady=5)
+        a_star_button.grid(row=4, column=0, padx=5, pady=5)
 
         hill_climbing_button = tk.Button(self.master, text="Hill Climbing", font=('Arial', 10), width=9, height=1, command=self.run_hill_climbing)
-        hill_climbing_button.grid(row=3, column=3, padx=5, pady=5)
+        hill_climbing_button.grid(row=4, column=1, padx=5, pady=5)
 
         bfs_button = tk.Button(self.master, text="BFS", width=9, height=1, font=('Arial', 10), command=self.run_bfs)
-        bfs_button.grid(row=3, column=2, padx=5, pady=5)
+        bfs_button.grid(row=4, column=2, padx=5, pady=5)
 
     def move_tile(self, i, j):
         ei, ej = self.empty_tile
