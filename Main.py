@@ -28,7 +28,6 @@ class EightPuzzle:
                 if number == 0:
                     self.empty_tile = (i, j)
         
-
     def create_buttons(self):
         self.buttons = [[None for _ in range(3)] for _ in range(3)]
         for i in range(3):
@@ -62,19 +61,6 @@ class EightPuzzle:
                 self.buttons[i][j].grid(row=i, column=j)
             self.empty_tile = (i, j)
             
-
-    # def check_victory(self):
-    #     correct = list(range(1, 9)) + [0]
-    #     current = [self.tiles[i][j] for i in range(3) for j in range(3)]
-    #     if current == correct:
-    #         self.show_victory_message()
-
-    # def show_victory_message(self):
-    #     victory_window = tk.Toplevel(self.master)
-    #     victory_window.title("Victory")
-    #     tk.Label(victory_window, text="Congratulations! You solved the puzzle!", font=('Arial', 16)).pack(padx=20, pady=20)
-    #     tk.Button(victory_window, text="OK", command=victory_window.destroy).pack(pady=10)
-
     def reset(self):
         print("Let's Do it Again !!")
         self.shuffle()
@@ -86,10 +72,8 @@ class EightPuzzle:
         #     if 0 <= new_i < 3 and 0 <= new_j < 3:
         #         self.move_tile(new_i, new_j)
         self.initialize_puzzle()
-        print("chakchouka : ",self.tiles)
         self.update_ui_with_state(self.tiles)
         
-
     def update_ui_with_state(self, state):
         for i in range(3):
             for j in range(3):
@@ -117,9 +101,9 @@ class EightPuzzle:
 
     def run_a_star(self):
         print("A Star")
-        # initial_state = tuple(map(tuple, self.tiles))
-        initial_state = ((2, 7, 3), (8, 5, 1), (6, 4, 0))
-        self.update_ui_with_state(initial_state)
+        initial_state = tuple(map(tuple, self.tiles))
+        # initial_state = ((2, 7, 3), (8, 5, 1), (6, 4, 0))
+        # self.update_ui_with_state(initial_state)
         print("Etat initial:")
         for s in initial_state:
             print(s)
@@ -130,7 +114,7 @@ class EightPuzzle:
             print(s)
         print("-------------")
         solution, iterations = AStarSolver.solve_puzzle(initial_state, goal_state)
-        self.animate_solution(solution,700)
+        self.animate_solution(solution,800)
         if solution:
             print("Solution found:")
             i = 0
@@ -145,12 +129,41 @@ class EightPuzzle:
         else:
             print("No solution found.")
 
+    def run_bfs(self):
+        print("BFS")
+        initial_state = tuple(map(tuple, self.tiles))
+        # initial_state = ((2, 7, 3), (8, 5, 1), (6, 4, 0))
+        # self.update_ui_with_state(initial_state)
+        print("Etat initial:")
+        for s in initial_state:
+            print(s)
+        print("-------------")
+        goal_state = ((1, 2, 3), (4, 5, 6), (7, 8, 0))
+        print("Etat final:")
+        for s in goal_state:
+            print(s)
+        print("-------------")
+        solution, iterations = BFSSolver.solve_puzzle(initial_state, goal_state)
+        self.animate_solution(solution,600)
+        if solution:
+            print("Solution found:")
+            i = 0
+            for step in solution:
+                i += 1
+                print("Step:", i)
+                for s in step:
+                    print(s)
+                print("-------------")
+            print("resolved in ", i, " step")
+            print("Resolved in ", iterations, " iterations")
+        else:
+            print("No solution found.")
 
     def run_hill_climbing(self):
         print("Hill Climbing")
-        # initial_state = tuple(map(tuple, self.tiles))
-        initial_state = ((2, 7, 3), (8, 5, 1), (6, 4, 0))
-        self.update_ui_with_state(initial_state)
+        initial_state = tuple(map(tuple, self.tiles))
+        # initial_state = ((2, 7, 3), (8, 5, 1), (6, 4, 0))
+        # self.update_ui_with_state(initial_state)
         print(initial_state)
         goal_state = ((0, 1, 2), (3, 4, 5), (6, 7, 8))
         print(goal_state)
@@ -168,38 +181,6 @@ class EightPuzzle:
             print(f"Resolved in {iterations} steps")
         else:
             print("No solution found.")
-
-
-    def run_bfs(self):
-        print("BFS")
-        # initial_state = tuple(map(tuple, self.tiles))
-        initial_state = ((2, 7, 3), (8, 5, 1), (6, 4, 0))
-        self.update_ui_with_state(initial_state)
-        print("Etat initial:")
-        for s in initial_state:
-            print(s)
-        print("-------------")
-        goal_state = ((1, 2, 3), (4, 5, 6), (7, 8, 0))
-        print("Etat final:")
-        for s in goal_state:
-            print(s)
-        print("-------------")
-        solution, iterations = BFSSolver.solve_puzzle(initial_state, goal_state)
-        self.animate_solution(solution,400)
-        if solution:
-            print("Solution found:")
-            i = 0
-            for step in solution:
-                i += 1
-                print("Step:", i)
-                for s in step:
-                    print(s)
-                print("-------------")
-            print("resolved in ", i, " step")
-            print("Resolved in ", iterations, " iterations")
-        else:
-            print("No solution found.")
-
 
 
 if __name__ == "__main__":

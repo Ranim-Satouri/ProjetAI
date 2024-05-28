@@ -13,7 +13,7 @@ class BFSSolver:
             _, current_state = heapq.heappop(frontier)
             iterations+=1
             if current_state == goal_state:
-                # Reconstruct path
+              
                 path = []
                 while current_state in came_from:
                     path.insert(0, current_state)
@@ -24,7 +24,6 @@ class BFSSolver:
                 if next_state not in came_from:
                     heapq.heappush(frontier, (BFSSolver.heuristic(next_state, goal_state), next_state))
                     came_from[next_state] = current_state
-            # print("frontier ",frontier)
             
 
         return None , iterations
@@ -49,7 +48,6 @@ class BFSSolver:
 
     @staticmethod
     def heuristic(state, goal_state):
-        # Manhattan distance heuristic
         distance = 0
         for i in range(3):
             for j in range(3):
