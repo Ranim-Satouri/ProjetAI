@@ -89,6 +89,7 @@ class AStarSolver:
                 if next_state not in cost_so_far or new_cost < cost_so_far[next_state]:
                     cost_so_far[next_state] = new_cost
                     priority = new_cost + AStarSolver.heuristic(next_state, goal_state)
+                    
                     frontier.put((priority, next_state))
                     came_from[next_state] = current_state
 

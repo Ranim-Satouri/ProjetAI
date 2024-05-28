@@ -290,19 +290,27 @@ class HillClimbingSolver:
 
         return neighbors
 
+    # @staticmethod
+    # def heuristic(state, goal_state):
+    #     distance = 0
+    #     for i in range(3):
+    #         for j in range(3):
+    #             if state[i][j] != goal_state[i][j] and state[i][j] != 0:
+    #                 target_x, target_y = None, None
+    #                 for tx in range(3):
+    #                     for ty in range(3):
+    #                         if goal_state[tx][ty] == state[i][j]:
+    #                             target_x, target_y = tx, ty
+    #                 distance += abs(target_x - i) + abs(target_y - j)
+    #     return distance
     @staticmethod
     def heuristic(state, goal_state):
-        distance = 0
+        misplaced_tiles = 0
         for i in range(3):
             for j in range(3):
                 if state[i][j] != goal_state[i][j] and state[i][j] != 0:
-                    target_x, target_y = None, None
-                    for tx in range(3):
-                        for ty in range(3):
-                            if goal_state[tx][ty] == state[i][j]:
-                                target_x, target_y = tx, ty
-                    distance += abs(target_x - i) + abs(target_y - j)
-        return distance
+                    misplaced_tiles += 1
+        return misplaced_tiles
 
     @staticmethod
     def random_state():
