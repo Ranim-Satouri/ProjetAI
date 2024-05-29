@@ -50,27 +50,12 @@ class EightPuzzle:
         bfs_button = tk.Button(self.master, text="BFS", width=9, height=1, font=('Arial', 10), command=self.run_bfs)
         bfs_button.grid(row=4, column=2, padx=5, pady=5)
 
-    def move_tile(self, i, j):
-        ei, ej = self.empty_tile
-        if (abs(i - ei) == 1 and j == ej) or (abs(j - ej) == 1 and i == ej):
-            self.tiles[ei][ej], self.tiles[i][j] = self.tiles[i][j], self.tiles[ei][ej]
-            self.buttons[ei][ej], self.buttons[i][j] = self.buttons[i][j], self.buttons[ei][ej]
-            if self.buttons[ei][ej]:
-                self.buttons[ei][ej].grid(row=ei, column=ej)
-            if self.buttons[i][j]:
-                self.buttons[i][j].grid(row=i, column=j)
-            self.empty_tile = (i, j)
             
     def reset(self):
         print("Let's Do it Again !!")
         self.shuffle()
 
     def shuffle(self):
-        # for _ in range(100):
-        #     i, j = random.choice([(1, 0), (-1, 0), (0, 1), (0, -1)])
-        #     new_i, new_j = self.empty_tile[0] + i, self.empty_tile[1] + j
-        #     if 0 <= new_i < 3 and 0 <= new_j < 3:
-        #         self.move_tile(new_i, new_j)
         self.initialize_puzzle()
         self.update_ui_with_state(self.tiles)
         
