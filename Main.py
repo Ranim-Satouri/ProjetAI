@@ -1,3 +1,4 @@
+#On a assayé d'éxpliquer le code iteration par iteration pour qu'il soit claire 
 import tkinter as tk
 import random
 from tkinter import messagebox

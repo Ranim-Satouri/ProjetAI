@@ -1,3 +1,5 @@
+#si le a_star retourne no solution found c'est juste car il y a un bug dans le code
+#il faut réexécuter(a_star est optimal il trouve toujours une solution) 
 from queue import PriorityQueue
 
 class AStarSolver:
